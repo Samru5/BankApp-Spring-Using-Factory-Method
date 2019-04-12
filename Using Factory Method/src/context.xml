@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   
+xmlns:util="http://www.springframework.org/schema/util"
+  
+xsi:schemaLocation="
+http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd
+
+http://www.springframework.org/schema/util 
+http://www.springframework.org/schema/util/spring-util.xsd">
+
+
+
+
+<util:properties id="myProperties" location="dbConfig.properties"/>
+
+<bean id="connection" class="com.capgemini.bankapp.util.DbUtil" factory-method="getConnection">
+
+</bean>
+
+<bean id="bankSer" class="com.capgemini.bankapp.service.impl.BankAccountServiceImpl">
+        <property name="daoProvider" ref="bankDao"></property>
+    </bean>
+ 
+    <bean id="bankDao" class="com.capgemini.bankapp.dao.impl.BankAccountDaoImpl">
+         <property name="connection" ref="connection"></property>
+    </bean>
+ 
+
+
+    
+
+</beans>
